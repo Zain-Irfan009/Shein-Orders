@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Lineitem;
 use App\Models\Order;
 use App\Models\OrderLineItem;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use function getShopify;
@@ -67,12 +68,54 @@ class OrderController extends Controller
 //        return redirect()->back()->with('message', 'Orders Synced Successfully');
 
     }
-    public function singleOrder($order, $shop)
+
+
+    public function order_create_webhook(Request $request)
+    {
+        $orderData = $request->all();
+        $order = json_decode(json_encode($orderData), false);
+        $this->singleOrder($order);
+        return response()->json(['success' => true]);
+    }
+
+
+
+    public function createWebhooks(Request $request)
+    {
+       $api=getShopify();
+
+
+        $data = [
+            "webhook" => [
+                "topic" => "orders/updated",
+                "address" => "https://phpstack-1365877-5032283.cloudwaysapps.com/webhook/order/update",
+                "format" => "json",
+            ]
+        ];
+        $response = $api->rest('POST', '/admin/webhooks.json', $data,[], true);
+        dd($response);
+
+        $data = [
+            "webhook" => [
+                "topic" => "orders/create",
+                "address" => "https://phpstack-1365877-5032283.cloudwaysapps.com/webhook/order/create",
+                "format" => "json",
+            ]
+        ];
+        $response = $api->rest('POST', '/admin/webhooks.json', $data,[], true);
+        dd($response);
+
+
+
+    }
+
+    public function singleOrder($order)
     {
 
+        $shop=User::first();
         if($order->financial_status!='refunded' && $order->cancelled_at==null  ) {
 
-            $newOrder = Order::where('shopify_id', $order->id)->where('shop_id', $shop->id)->first();
+            $newOrder = Order::where('shopify_id', $order->id)->first();
             if ($newOrder == null) {
                 $newOrder = new Order();
             }

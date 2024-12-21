@@ -49,26 +49,26 @@
                         <div class="card-header">
                             <ul class="nav nav-tabs card-header-tabs nav-fill" data-bs-toggle="tabs">
                                 <li class="nav-item">
-                                    <a href="#tabs-home-5" class="nav-link active" data-bs-toggle="tab">Pending Order from SHEIN</a>
+                                    <a href="#tabs-home-5" class="nav-link active" data-bs-toggle="tab">Pending Order from SHEIN ({{$pending_sessions_count}})</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#tabs-profile-5" class="nav-link" data-bs-toggle="tab">Waiting to Purchase</a>
+                                    <a href="#tabs-profile-5" class="nav-link" data-bs-toggle="tab">Waiting to Purchase ({{$waiting_to_purchase_count}})</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#tabs-activity-5" class="nav-link" data-bs-toggle="tab">Ordered on SHEIN</a>
+                                    <a href="#tabs-activity-5" class="nav-link" data-bs-toggle="tab">Ordered on SHEIN ({{$ordered_on_sheins_count}})</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#tabs-activity-6" class="nav-link" data-bs-toggle="tab">Shipping from SHEIN</a>
+                                    <a href="#tabs-activity-6" class="nav-link" data-bs-toggle="tab">Shipped from SHEIN ({{$shipped_from_sheins_count}}</a>
                                 </li>
 
+{{--                                <li class="nav-item">--}}
+{{--                                    <a href="#tabs-activity-7" class="nav-link" data-bs-toggle="tab">Received in Dubai</a>--}}
+{{--                                </li>--}}
                                 <li class="nav-item">
-                                    <a href="#tabs-activity-7" class="nav-link" data-bs-toggle="tab">Received in Dubai</a>
+                                    <a href="#tabs-activity-8" class="nav-link" data-bs-toggle="tab">Received in Iraq ({{$sent_to_iraq_count}})</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#tabs-activity-8" class="nav-link" data-bs-toggle="tab">Sent to Iraq</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#tabs-activity-9" class="nav-link" data-bs-toggle="tab">Fulfilled</a>
+                                    <a href="#tabs-activity-9" class="nav-link" data-bs-toggle="tab">Fulfilled ({{$fulfilled_orders_count}})</a>
                                 </li>
                             </ul>
                         </div>
@@ -83,6 +83,7 @@
                                                 <tr>
                                                     <th>Session Id</th>
                                                     <th>No of items</th>
+                                                    <th>Date Created</th>
                                                     <th>Session Link</th>
                                                     <th>tracking Link</th>
                                                     <th>Action</th>
@@ -94,6 +95,7 @@
                                                         <tr>
                                                             <td>#{{++$index}}</td>
                                                             <td>{{$pending_session->no_of_items}}</td>
+                                                            <td>{{ $pending_session->created_at->format('d F, Y') }}</td>
                                                             <td>{{$pending_session->session_link}}</td>
                                                             <td>{{$pending_session->tracking_link}}</td>
                                                             <td style="display: flex">
@@ -141,6 +143,7 @@
                                                 <tr>
                                                     <th>Session Id</th>
                                                     <th>No of items</th>
+                                                    <th>Date Created</th>
                                                     <th>Session Link</th>
                                                     <th>tracking Link</th>
                                                     <th>Action</th>
@@ -153,6 +156,8 @@
                                                     <tr>
                                                         <td>#{{++$index}}</td>
                                                         <td>{{$purchase->no_of_items}}</td>
+                                                        <td>{{ $purchase->created_at->format('d F, Y') }}</td>
+
                                                         <td>{{$purchase->session_link}}</td>
                                                         <td>{{$purchase->tracking_link}}</td>
                                                         <td style="display: flex">
@@ -201,6 +206,7 @@
                                                     <tr>
                                                         <th>Session Id</th>
                                                         <th>No of items</th>
+                                                        <th>Date Purchase</th>
                                                         <th>Session Link</th>
                                                         <th>tracking Link</th>
                                                         <th>Action</th>
@@ -213,6 +219,7 @@
                                                         <tr>
                                                             <td>#{{++$index}}</td>
                                                             <td>{{$ordered_on_shein->no_of_items}}</td>
+                                                            <td>{{ $ordered_on_shein->created_at->format('d F, Y') }}</td>
                                                             <td>{{$ordered_on_shein->session_link}}</td>
                                                             <td>{{$ordered_on_shein->tracking_link}}</td>
                                                             <td style="display: flex">
@@ -228,11 +235,11 @@
 
                                                                 <div style="display:inline-flex;margin-top:9px;margin-left: 6px">
 
-                                                                    <a href="{{ route('view_session', $purchase->id) }}" class="text-primary" title="View">
+                                                                    <a href="{{ route('view_session', $ordered_on_shein->id) }}" class="text-primary" title="View">
                                                                         <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
                                                                     </a>
 
-                                                                    <a  data-id="{{$purchase->id}}" class="text-danger delete_single_btn" title="Delete" >
+                                                                    <a  data-id="{{$ordered_on_shein->id}}" class="text-danger delete_single_btn" title="Delete" >
                                                                         <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
                                                                     </a>
                                                                 </div>
@@ -261,6 +268,7 @@
                                                     <tr>
                                                         <th>Session Id</th>
                                                         <th>No of items</th>
+                                                        <th>Date Created</th>
                                                         <th>Session Link</th>
                                                         <th>tracking Link</th>
                                                         <th>Action</th>
@@ -273,6 +281,7 @@
                                                         <tr>
                                                             <td>#{{++$index}}</td>
                                                             <td>{{$shipped_from_shein->no_of_items}}</td>
+                                                            <td>{{ $shipped_from_shein->created_at->format('d F, Y') }}</td>
                                                             <td>{{$shipped_from_shein->session_link}}</td>
                                                             <td>{{$shipped_from_shein->tracking_link}}</td>
                                                             <td style="display: flex">
@@ -311,66 +320,68 @@
                                     </div>
 
                                 </div>
-                                <div class="tab-pane" id="tabs-activity-7">
+{{--                                <div class="tab-pane" id="tabs-activity-7">--}}
 
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12">
-                                            @if(count($received_in_dubai_orders) > 0)
-                                                <table id="ordersTable4" class="display table">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>Session Id</th>
-                                                        <th>No of items</th>
-                                                        <th>Session Link</th>
-                                                        <th>tracking Link</th>
-                                                        <th>Action</th>
+{{--                                    <div class="row">--}}
+{{--                                        <div class="col-lg-12 col-md-12">--}}
+{{--                                            @if(count($received_in_dubai_orders) > 0)--}}
+{{--                                                <table id="ordersTable4" class="display table">--}}
+{{--                                                    <thead>--}}
+{{--                                                    <tr>--}}
+{{--                                                        <th>Session Id</th>--}}
+{{--                                                        <th>No of items</th>--}}
+{{--                                                        <th>Date Created</th>--}}
+{{--                                                        <th>Session Link</th>--}}
+{{--                                                        <th>tracking Link</th>--}}
+{{--                                                        <th>Action</th>--}}
 
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
+{{--                                                    </tr>--}}
+{{--                                                    </thead>--}}
+{{--                                                    <tbody>--}}
 
-                                                    @foreach($received_in_dubai_orders as $index=> $received_in_dubai_order)
-                                                        <tr>
-                                                            <td>#{{++$index}}</td>
-                                                            <td>{{$received_in_dubai_order->no_of_items}}</td>
-                                                            <td>{{$received_in_dubai_order->session_link}}</td>
-                                                            <td>{{$received_in_dubai_order->tracking_link}}</td>
-                                                            <td style="display: flex">
-                                                                <select class="status-dropdown form-control" data-session-id="{{ $received_in_dubai_order->id }}">
-                                                                    <option value="pending" {{ $received_in_dubai_order->status == 'pending' ? 'selected' : '' }}>Pending Order From Shein</option>
-                                                                    <option value="waiting_to_purchase" {{ $received_in_dubai_order->status == 'waiting_to_purchase' ? 'selected' : '' }}>Waiting to Purchase</option>
-                                                                    <option value="ordered_on_shein" {{ $received_in_dubai_order->status == 'ordered_on_shein' ? 'selected' : '' }}>Ordered on Shein</option>
-                                                                    <option value="shipped_from_shein" {{ $received_in_dubai_order->status == 'shipped_from_shein' ? 'selected' : '' }}>Shipping from Shein</option>
-                                                                    <option value="received_in_dubai" {{ $received_in_dubai_order->status == 'received_in_dubai' ? 'selected' : '' }}>Received in Dubai</option>
-                                                                    <option value="sent_to_iraq" {{ $received_in_dubai_order->status == 'sent_to_iraq' ? 'selected' : '' }}>Sent to Iraq</option>
-                                                                    <option value="fulfilled" {{ $received_in_dubai_order->status == 'fulfilled' ? 'selected' : '' }}>Fulfilled</option>
-                                                                </select>
+{{--                                                    @foreach($received_in_dubai_orders as $index=> $received_in_dubai_order)--}}
+{{--                                                        <tr>--}}
+{{--                                                            <td>#{{++$index}}</td>--}}
+{{--                                                            <td>{{$received_in_dubai_order->no_of_items}}</td>--}}
+{{--                                                            <td>{{ $received_in_dubai_order->created_at->format('d F, Y') }}</td>--}}
+{{--                                                            <td>{{$received_in_dubai_order->session_link}}</td>--}}
+{{--                                                            <td>{{$received_in_dubai_order->tracking_link}}</td>--}}
+{{--                                                            <td style="display: flex">--}}
+{{--                                                                <select class="status-dropdown form-control" data-session-id="{{ $received_in_dubai_order->id }}">--}}
+{{--                                                                    <option value="pending" {{ $received_in_dubai_order->status == 'pending' ? 'selected' : '' }}>Pending Order From Shein</option>--}}
+{{--                                                                    <option value="waiting_to_purchase" {{ $received_in_dubai_order->status == 'waiting_to_purchase' ? 'selected' : '' }}>Waiting to Purchase</option>--}}
+{{--                                                                    <option value="ordered_on_shein" {{ $received_in_dubai_order->status == 'ordered_on_shein' ? 'selected' : '' }}>Ordered on Shein</option>--}}
+{{--                                                                    <option value="shipped_from_shein" {{ $received_in_dubai_order->status == 'shipped_from_shein' ? 'selected' : '' }}>Shipping from Shein</option>--}}
+{{--                                                                    <option value="received_in_dubai" {{ $received_in_dubai_order->status == 'received_in_dubai' ? 'selected' : '' }}>Received in Dubai</option>--}}
+{{--                                                                    <option value="sent_to_iraq" {{ $received_in_dubai_order->status == 'sent_to_iraq' ? 'selected' : '' }}>Sent to Iraq</option>--}}
+{{--                                                                    <option value="fulfilled" {{ $received_in_dubai_order->status == 'fulfilled' ? 'selected' : '' }}>Fulfilled</option>--}}
+{{--                                                                </select>--}}
 
-                                                                <div style="display:inline-flex;margin-top:9px;margin-left: 6px">
+{{--                                                                <div style="display:inline-flex;margin-top:9px;margin-left: 6px">--}}
 
-                                                                    <a href="{{ route('view_session', $received_in_dubai_order->id) }}" class="text-primary" title="View">
-                                                                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
-                                                                    </a>
+{{--                                                                    <a href="{{ route('view_session', $received_in_dubai_order->id) }}" class="text-primary" title="View">--}}
+{{--                                                                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>--}}
+{{--                                                                    </a>--}}
 
-                                                                    <a  data-id="{{$received_in_dubai_order->id}}" class="text-danger delete_single_btn" title="Delete" >
-                                                                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
-                                                                    </a>
-                                                                </div>
-                                                            </td>
+{{--                                                                    <a  data-id="{{$received_in_dubai_order->id}}" class="text-danger delete_single_btn" title="Delete" >--}}
+{{--                                                                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>--}}
+{{--                                                                    </a>--}}
+{{--                                                                </div>--}}
+{{--                                                            </td>--}}
 
-                                                        </tr>
-                                                    @endforeach
+{{--                                                        </tr>--}}
+{{--                                                    @endforeach--}}
 
 
-                                                    </tbody>
-                                                </table>
-                                            @else
-                                                No Record Found
-                                            @endif
-                                        </div>
-                                    </div>
+{{--                                                    </tbody>--}}
+{{--                                                </table>--}}
+{{--                                            @else--}}
+{{--                                                No Record Found--}}
+{{--                                            @endif--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
 
-                                </div>
+{{--                                </div>--}}
                                 <div class="tab-pane" id="tabs-activity-8">
 
                                     <div class="row">
@@ -381,6 +392,7 @@
                                                     <tr>
                                                         <th>Session Id</th>
                                                         <th>No of items</th>
+                                                        <th>Date Created</th>
                                                         <th>Session Link</th>
                                                         <th>tracking Link</th>
                                                         <th>Action</th>
@@ -393,6 +405,7 @@
                                                         <tr>
                                                             <td>#{{++$index}}</td>
                                                             <td>{{$sent_to_iraq_order->no_of_items}}</td>
+                                                            <td>{{ $sent_to_iraq_order->created_at->format('d F, Y') }}</td>
                                                             <td>{{$sent_to_iraq_order->session_link}}</td>
                                                             <td>{{$sent_to_iraq_order->tracking_link}}</td>
                                                             <td style="display: flex">
@@ -441,6 +454,7 @@
                                                     <tr>
                                                         <th>Session Id</th>
                                                         <th>No of items</th>
+                                                        <th>Date Created</th>
                                                         <th>Session Link</th>
                                                         <th>tracking Link</th>
                                                         <th>Action</th>
@@ -453,6 +467,7 @@
                                                         <tr>
                                                             <td>#{{++$index}}</td>
                                                             <td>{{$fulfilled_order->no_of_items}}</td>
+                                                            <td>{{ $fulfilled_order->created_at->format('d F, Y') }}</td>
                                                             <td>{{$fulfilled_order->session_link}}</td>
                                                             <td>{{$fulfilled_order->tracking_link}}</td>
                                                             <td style="display: flex">
@@ -466,7 +481,9 @@
                                                                     <option value="fulfilled" {{ $fulfilled_order->status == 'fulfilled' ? 'selected' : '' }}>Fulfilled</option>
                                                                 </select>
 
-                                                                <div style="display:inline-flex;margin-top:9px;margin-left: 6px">
+                                                                <div style="display:inline-flex;margin-left: 6px">
+
+                                                                    <a target="_blank" href="{{route('print_invoice',$fulfilled_order->id)}}" class="btn  btn-primary">Print</a>
 
                                                                     <a href="{{ route('view_session', $fulfilled_order->id) }}" class="text-primary" title="View">
                                                                         <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>

@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class PackageController extends Controller
 {
+
+    public function packages(){
+        $packages=Package::paginate(10);
+        return view('admin.packages.index',compact('packages'));
+    }
     public function SavePackage(Request $request){
         $package=new Package();
         $package->session_id=$request->session_id;

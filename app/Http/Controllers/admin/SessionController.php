@@ -8,6 +8,7 @@ use App\Models\OrderLineItem;
 use App\Models\Package;
 use App\Models\Session;
 use App\Models\SessionOrderItem;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 
@@ -15,13 +16,25 @@ class SessionController extends Controller
 {
     public function index(){
         $pending_sessions=Session::where('status','pending')->get();
+        $pending_sessions_count=Session::where('status','pending')->count();
+
         $waiting_to_purchase=Session::where('status','waiting_to_purchase')->get();
+        $waiting_to_purchase_count=Session::where('status','waiting_to_purchase')->count();
+
         $ordered_on_sheins=Session::where('status','ordered_on_shein')->get();
+        $ordered_on_sheins_count=Session::where('status','ordered_on_shein')->count();
+
         $shipped_from_sheins=Session::where('status','shipped_from_shein')->get();
+        $shipped_from_sheins_count=Session::where('status','shipped_from_shein')->count();
+
         $received_in_dubai_orders=Session::where('status','received_in_dubai')->get();
+
         $sent_to_iraq_orders=Session::where('status','sent_to_iraq')->get();
+        $sent_to_iraq_count=Session::where('status','sent_to_iraq')->count();
+
         $fulfilled_orders=Session::where('status','fulfilled')->get();
-        return view('admin.sessions.index',compact('pending_sessions','waiting_to_purchase','shipped_from_sheins','ordered_on_sheins','received_in_dubai_orders','sent_to_iraq_orders','fulfilled_orders'));
+        $fulfilled_orders_count=Session::where('status','fulfilled')->count();
+        return view('admin.sessions.index',compact('pending_sessions','pending_sessions_count','waiting_to_purchase','waiting_to_purchase_count','shipped_from_sheins','shipped_from_sheins_count','ordered_on_sheins','ordered_on_sheins_count','received_in_dubai_orders','sent_to_iraq_orders','sent_to_iraq_count','fulfilled_orders','fulfilled_orders_count'));
     }
 
     public function CreateSession(){
@@ -125,5 +138,10 @@ class SessionController extends Controller
             ->with('success', 'Details updated successfully');
     }
 
+    public function PrintInvoice($id){
+
+        $pdf = PDF::loadView('admin.packages.invoice')->setPaper( 'landscape');
+        return $pdf->stream('document.pdf');
+    }
 
 }

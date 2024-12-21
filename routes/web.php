@@ -47,7 +47,26 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/save/package', [\App\Http\Controllers\admin\PackageController::class, 'SavePackage'])->name('save_package');
     Route::post('/update/package/{id}', [\App\Http\Controllers\admin\PackageController::class, 'UpdatePackage'])->name('update_package');
     Route::get('/delete/package/{id}', [\App\Http\Controllers\admin\PackageController::class, 'DeletePackage'])->name('delete_package');
+
+
+
+    Route::get('/packages', [\App\Http\Controllers\admin\PackageController::class, 'Packages'])->name('packages');
+    Route::get('/print/invoice/{id}', [\App\Http\Controllers\admin\SessionController::class, 'PrintInvoice'])->name('print_invoice');
+
+
+
 });
+
+
+Route::get('/create/webhook', [\App\Http\Controllers\admin\OrderController::class, 'createWebhooks'])->name('admin.orders.webhook.create');
+Route::any('webhook/order/create', [\App\Http\Controllers\admin\OrderController::class, 'order_create_webhook']);
+Route::any('webhook/order/update', [\App\Http\Controllers\admin\OrderController::class, 'order_create_webhook']);
+
+Route::any('webhook/product/create', [\App\Http\Controllers\ProductController::class, 'product_create_webhook']);
+Route::any('webhook/product/update', [\App\Http\Controllers\ProductController::class, 'product_create_webhook']);
+Route::any('webhook/product/delete', [\App\Http\Controllers\ProductController::class, 'product_delete_webhook']);
+
+
 Auth::routes();
 
 

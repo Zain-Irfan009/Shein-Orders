@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Package extends Model
 {
     use HasFactory;
+
+
+    public function sessions()
+    {
+        return $this->belongsTo(Session::class,'session_id');
+    }
 }

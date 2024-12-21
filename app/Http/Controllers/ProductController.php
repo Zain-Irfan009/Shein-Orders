@@ -39,6 +39,15 @@ class ProductController extends Controller
 //        return Redirect::tokenRedirect('all.products', ['notice' => 'Products Synced Successfully']);
     }
 
+
+    public function product_create_webhook(Request  $request){
+        $productData = $request->all();
+        $product = json_decode(json_encode($productData), false);
+        $shop=User::first();
+        $this->createShopifyProducts($product,$shop);
+        return response()->json(['success' => true]);
+    }
+
     public function createShopifyProducts($product, $shop)
     {
         $p = Product::where('shopify_id', $product->id)->where('shop_id',$shop->id)->first();
@@ -100,5 +109,19 @@ class ProductController extends Controller
                 $v->save();
             }
         }
+    }
+
+
+    public function product_delete_webhook(Request $request){
+
+        $productData = $request->all();
+        $product = json_decode(json_encode($productData), false);
+        $dellproduct = Product::where('shopify_id',$product->id)->first();
+        $product_id = $product->id;
+        $productvarients = ProductVariant::where('shopify_product_id',$product_id)->get();
+        foreach ($productvarients as $varient){
+            $varient->delete();
+        }
+        $dellproduct->delete();
     }
 }
