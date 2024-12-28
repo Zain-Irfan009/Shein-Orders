@@ -84,8 +84,6 @@
                                                     <th>Session Id</th>
                                                     <th>No of items</th>
                                                     <th>Date Created</th>
-                                                    <th>Session Link</th>
-                                                    <th>tracking Link</th>
                                                     <th>Action</th>
 
                                                 </tr>
@@ -96,16 +94,14 @@
                                                             <td>#{{++$index}}</td>
                                                             <td>{{$pending_session->no_of_items}}</td>
                                                             <td>{{ $pending_session->created_at->format('d F, Y') }}</td>
-                                                            <td>{{$pending_session->session_link}}</td>
-                                                            <td>{{$pending_session->tracking_link}}</td>
                                                             <td style="display: flex">
                                                                 <select class="status-dropdown form-control" data-session-id="{{ $pending_session->id }}">
                                                                     <option value="pending" {{ $pending_session->status == 'pending' ? 'selected' : '' }}>Pending Order From Shein</option>
                                                                     <option value="waiting_to_purchase" {{ $pending_session->status == 'waiting_to_purchase' ? 'selected' : '' }}>Waiting to Purchase</option>
                                                                     <option value="ordered_on_shein" {{ $pending_session->status == 'ordered_on_shein' ? 'selected' : '' }}>Ordered on Shein</option>
                                                                     <option value="shipped_from_shein" {{ $pending_session->status == 'shipped_from_shein' ? 'selected' : '' }}>Shipping from Shein</option>
-                                                                    <option value="received_in_dubai" {{ $pending_session->status == 'received_in_dubai' ? 'selected' : '' }}>Received in Dubai</option>
-                                                                    <option value="sent_to_iraq" {{ $pending_session->status == 'sent_to_iraq' ? 'selected' : '' }}>Sent to Iraq</option>
+{{--                                                                    <option value="received_in_dubai" {{ $pending_session->status == 'received_in_dubai' ? 'selected' : '' }}>Received in Dubai</option>--}}
+                                                                    <option value="sent_to_iraq" {{ $pending_session->status == 'sent_to_iraq' ? 'selected' : '' }}>Received in Iraq</option>
                                                                     <option value="fulfilled" {{ $pending_session->status == 'fulfilled' ? 'selected' : '' }}>Fulfilled</option>
                                                                 </select>
 
@@ -144,8 +140,7 @@
                                                     <th>Session Id</th>
                                                     <th>No of items</th>
                                                     <th>Date Created</th>
-                                                    <th>Session Link</th>
-                                                    <th>tracking Link</th>
+
                                                     <th>Action</th>
 
                                                 </tr>
@@ -158,16 +153,14 @@
                                                         <td>{{$purchase->no_of_items}}</td>
                                                         <td>{{ $purchase->created_at->format('d F, Y') }}</td>
 
-                                                        <td>{{$purchase->session_link}}</td>
-                                                        <td>{{$purchase->tracking_link}}</td>
                                                         <td style="display: flex">
                                                             <select class="status-dropdown form-control" data-session-id="{{ $purchase->id }}">
                                                                 <option value="pending" {{ $purchase->status == 'pending' ? 'selected' : '' }}>Pending Order From Shein</option>
                                                                 <option value="waiting_to_purchase" {{ $purchase->status == 'waiting_to_purchase' ? 'selected' : '' }}>Waiting to Purchase</option>
                                                                 <option value="ordered_on_shein" {{ $purchase->status == 'ordered_on_shein' ? 'selected' : '' }}>Ordered on Shein</option>
                                                                 <option value="shipped_from_shein" {{ $purchase->status == 'shipped_from_shein' ? 'selected' : '' }}>Shipping from Shein</option>
-                                                                <option value="received_in_dubai" {{ $purchase->status == 'received_in_dubai' ? 'selected' : '' }}>Received in Dubai</option>
-                                                                <option value="sent_to_iraq" {{ $purchase->status == 'sent_to_iraq' ? 'selected' : '' }}>Sent to Iraq</option>
+{{--                                                                <option value="received_in_dubai" {{ $purchase->status == 'received_in_dubai' ? 'selected' : '' }}>Received in Dubai</option>--}}
+                                                                <option value="sent_to_iraq" {{ $purchase->status == 'sent_to_iraq' ? 'selected' : '' }}>Received in Iraq</option>
                                                                 <option value="fulfilled" {{ $purchase->status == 'fulfilled' ? 'selected' : '' }}>Fulfilled</option>
                                                             </select>
 
@@ -207,8 +200,7 @@
                                                         <th>Session Id</th>
                                                         <th>No of items</th>
                                                         <th>Date Purchase</th>
-                                                        <th>Session Link</th>
-                                                        <th>tracking Link</th>
+                                                        <th>Package NO</th>
                                                         <th>Action</th>
 
                                                     </tr>
@@ -220,28 +212,35 @@
                                                             <td>#{{++$index}}</td>
                                                             <td>{{$ordered_on_shein->no_of_items}}</td>
                                                             <td>{{ $ordered_on_shein->created_at->format('d F, Y') }}</td>
-                                                            <td>{{$ordered_on_shein->session_link}}</td>
-                                                            <td>{{$ordered_on_shein->tracking_link}}</td>
+                                                            <td>{{$ordered_on_shein->has_packages_count}}</td>
                                                             <td style="display: flex">
                                                                 <select class="status-dropdown form-control" data-session-id="{{ $ordered_on_shein->id }}">
                                                                     <option value="pending" {{ $ordered_on_shein->status == 'pending' ? 'selected' : '' }}>Pending Order From Shein</option>
                                                                     <option value="waiting_to_purchase" {{ $ordered_on_shein->status == 'waiting_to_purchase' ? 'selected' : '' }}>Waiting to Purchase</option>
                                                                     <option value="ordered_on_shein" {{ $ordered_on_shein->status == 'ordered_on_shein' ? 'selected' : '' }}>Ordered on Shein</option>
                                                                     <option value="shipped_from_shein" {{ $ordered_on_shein->status == 'shipped_from_shein' ? 'selected' : '' }}>Shipping from Shein</option>
-                                                                    <option value="received_in_dubai" {{ $ordered_on_shein->status == 'received_in_dubai' ? 'selected' : '' }}>Received in Dubai</option>
-                                                                    <option value="sent_to_iraq" {{ $ordered_on_shein->status == 'sent_to_iraq' ? 'selected' : '' }}>Sent to Iraq</option>
+{{--                                                                    <option value="received_in_dubai" {{ $ordered_on_shein->status == 'received_in_dubai' ? 'selected' : '' }}>Received in Dubai</option>--}}
+                                                                    <option value="sent_to_iraq" {{ $ordered_on_shein->status == 'sent_to_iraq' ? 'selected' : '' }}>Received in Iraq</option>
                                                                     <option value="fulfilled" {{ $ordered_on_shein->status == 'fulfilled' ? 'selected' : '' }}>Fulfilled</option>
                                                                 </select>
 
                                                                 <div style="display:inline-flex;margin-top:9px;margin-left: 6px">
 
+                                                                    @if($ordered_on_shein->session_order_no)
+                                                                    <a target="_blank" href="https://www.shein.com/user/orders/detail/{{$ordered_on_shein->session_order_no}}" class="text-success" title="Session Link">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-link"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 15l6 -6" /><path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" /><path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" /></svg>
+                                                                    </a>
+                                                                    <a target="_blank" href="https://www.shein.com/user/orders/track/{{$ordered_on_shein->session_order_no}}" class="text-info" title="Tracking Link">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-truck"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M5 17h-2v-11a1 1 0 0 1 1 -1h9v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5" /></svg>
+                                                                    </a>
+                                                                    @endif
                                                                     <a href="{{ route('view_session', $ordered_on_shein->id) }}" class="text-primary" title="View">
                                                                         <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
                                                                     </a>
-
                                                                     <a  data-id="{{$ordered_on_shein->id}}" class="text-danger delete_single_btn" title="Delete" >
                                                                         <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
                                                                     </a>
+
                                                                 </div>
                                                             </td>
 
@@ -290,8 +289,8 @@
                                                                     <option value="waiting_to_purchase" {{ $shipped_from_shein->status == 'waiting_to_purchase' ? 'selected' : '' }}>Waiting to Purchase</option>
                                                                     <option value="ordered_on_shein" {{ $shipped_from_shein->status == 'ordered_on_shein' ? 'selected' : '' }}>Ordered on Shein</option>
                                                                     <option value="shipped_from_shein" {{ $shipped_from_shein->status == 'shipped_from_shein' ? 'selected' : '' }}>Shipping from Shein</option>
-                                                                    <option value="received_in_dubai" {{ $shipped_from_shein->status == 'received_in_dubai' ? 'selected' : '' }}>Received in Dubai</option>
-                                                                    <option value="sent_to_iraq" {{ $shipped_from_shein->status == 'sent_to_iraq' ? 'selected' : '' }}>Sent to Iraq</option>
+{{--                                                                    <option value="received_in_dubai" {{ $shipped_from_shein->status == 'received_in_dubai' ? 'selected' : '' }}>Received in Dubai</option>--}}
+                                                                    <option value="sent_to_iraq" {{ $shipped_from_shein->status == 'sent_to_iraq' ? 'selected' : '' }}>Received in Iraq</option>
                                                                     <option value="fulfilled" {{ $shipped_from_shein->status == 'fulfilled' ? 'selected' : '' }}>Fulfilled</option>
                                                                 </select>
 
@@ -393,8 +392,7 @@
                                                         <th>Session Id</th>
                                                         <th>No of items</th>
                                                         <th>Date Created</th>
-                                                        <th>Session Link</th>
-                                                        <th>tracking Link</th>
+
                                                         <th>Action</th>
 
                                                     </tr>
@@ -406,21 +404,28 @@
                                                             <td>#{{++$index}}</td>
                                                             <td>{{$sent_to_iraq_order->no_of_items}}</td>
                                                             <td>{{ $sent_to_iraq_order->created_at->format('d F, Y') }}</td>
-                                                            <td>{{$sent_to_iraq_order->session_link}}</td>
-                                                            <td>{{$sent_to_iraq_order->tracking_link}}</td>
+
                                                             <td style="display: flex">
                                                                 <select class="status-dropdown form-control" data-session-id="{{ $sent_to_iraq_order->id }}">
                                                                     <option value="pending" {{ $sent_to_iraq_order->status == 'pending' ? 'selected' : '' }}>Pending Order From Shein</option>
                                                                     <option value="waiting_to_purchase" {{ $sent_to_iraq_order->status == 'waiting_to_purchase' ? 'selected' : '' }}>Waiting to Purchase</option>
                                                                     <option value="ordered_on_shein" {{ $sent_to_iraq_order->status == 'ordered_on_shein' ? 'selected' : '' }}>Ordered on Shein</option>
                                                                     <option value="shipped_from_shein" {{ $sent_to_iraq_order->status == 'shipped_from_shein' ? 'selected' : '' }}>Shipping from Shein</option>
-                                                                    <option value="received_in_dubai" {{ $sent_to_iraq_order->status == 'received_in_dubai' ? 'selected' : '' }}>Received in Dubai</option>
-                                                                    <option value="sent_to_iraq" {{ $sent_to_iraq_order->status == 'sent_to_iraq' ? 'selected' : '' }}>Sent to Iraq</option>
+{{--                                                                    <option value="received_in_dubai" {{ $sent_to_iraq_order->status == 'received_in_dubai' ? 'selected' : '' }}>Received in Dubai</option>--}}
+                                                                    <option value="sent_to_iraq" {{ $sent_to_iraq_order->status == 'sent_to_iraq' ? 'selected' : '' }}>Received in Iraq</option>
                                                                     <option value="fulfilled" {{ $sent_to_iraq_order->status == 'fulfilled' ? 'selected' : '' }}>Fulfilled</option>
                                                                 </select>
 
                                                                 <div style="display:inline-flex;margin-top:9px;margin-left: 6px">
 
+                                                                    @if($sent_to_iraq_order->session_order_no)
+                                                                        <a target="_blank" href="https://www.shein.com/user/orders/detail/{{$sent_to_iraq_order->session_order_no}}" class="text-success" title="Session Link">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-link"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 15l6 -6" /><path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" /><path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" /></svg>
+                                                                        </a>
+                                                                        <a target="_blank" href="https://www.shein.com/user/orders/track/{{$sent_to_iraq_order->session_order_no}}" class="text-info" title="Tracking Link">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-truck"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M5 17h-2v-11a1 1 0 0 1 1 -1h9v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5" /></svg>
+                                                                        </a>
+                                                                    @endif
                                                                     <a href="{{ route('view_session', $sent_to_iraq_order->id) }}" class="text-primary" title="View">
                                                                         <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
                                                                     </a>
@@ -476,14 +481,17 @@
                                                                     <option value="waiting_to_purchase" {{ $fulfilled_order->status == 'waiting_to_purchase' ? 'selected' : '' }}>Waiting to Purchase</option>
                                                                     <option value="ordered_on_shein" {{ $fulfilled_order->status == 'ordered_on_shein' ? 'selected' : '' }}>Ordered on Shein</option>
                                                                     <option value="shipped_from_shein" {{ $fulfilled_order->status == 'shipped_from_shein' ? 'selected' : '' }}>Shipping from Shein</option>
-                                                                    <option value="received_in_dubai" {{ $fulfilled_order->status == 'received_in_dubai' ? 'selected' : '' }}>Received in Dubai</option>
-                                                                    <option value="sent_to_iraq" {{ $fulfilled_order->status == 'sent_to_iraq' ? 'selected' : '' }}>Sent to Iraq</option>
+{{--                                                                    <option value="received_in_dubai" {{ $fulfilled_order->status == 'received_in_dubai' ? 'selected' : '' }}>Received in Dubai</option>--}}
+                                                                    <option value="sent_to_iraq" {{ $fulfilled_order->status == 'sent_to_iraq' ? 'selected' : '' }}>Received in Iraq</option>
                                                                     <option value="fulfilled" {{ $fulfilled_order->status == 'fulfilled' ? 'selected' : '' }}>Fulfilled</option>
                                                                 </select>
 
-                                                                <div style="display:inline-flex;margin-left: 6px">
+                                                                <div style="display:inline-flex;margin-left: 6px;margin-top:9px">
 
-                                                                    <a target="_blank" href="{{route('print_invoice',$fulfilled_order->id)}}" class="btn  btn-primary">Print</a>
+{{--                                                                    <a target="_blank" href="{{route('print_invoice',$fulfilled_order->id)}}" class="text-primary" title="Print">--}}
+                                                                    <a target="_blank" href="#" class="text-primary" title="Print">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-printer"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2" /><path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4" /><path d="M7 13m0 2a2 2 0 0 1 2 -2h6a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-6a2 2 0 0 1 -2 -2z" /></svg>
+                                                                    </a>
 
                                                                     <a href="{{ route('view_session', $fulfilled_order->id) }}" class="text-primary" title="View">
                                                                         <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>

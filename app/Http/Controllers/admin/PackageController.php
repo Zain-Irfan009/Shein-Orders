@@ -18,6 +18,7 @@ class PackageController extends Controller
         $package=new Package();
         $package->session_id=$request->session_id;
         $package->tracking_number=$request->tracking_number;
+        $package->zmc_airway_bill=$request->zmc_airway_bill;
         $package->status=$request->status;
         $package->save();
 
@@ -32,6 +33,7 @@ class PackageController extends Controller
         if($package) {
             $package->session_id = $request->session_id;
             $package->tracking_number = $request->tracking_number;
+            $package->zmc_airway_bill=$request->zmc_airway_bill;
             $package->status = $request->status;
             $package->save();
 

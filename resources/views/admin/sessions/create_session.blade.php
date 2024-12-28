@@ -16,23 +16,26 @@
                 @csrf
             <div class="row row-deck row-cards">
 
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <h2 class="page-title">
                         Create Session
                     </h2>
                 </div>
-                <div class="col-md-5"></div>
-                <div class="col-md-1" >
-                    <div class="form-group" style="text-align: right">
-                        <button type="submit"  class="btn btn-primary saveButton"  style="display: none;">Save</button>
-                </div>
+                <div class="col-md-4 d-flex justify-content-end align-items-center">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="saveButton" style="display: none;">
+                            <span>Item Selected: </span>
+                            <span class="selected-count">0</span>
+                        </div>
+                        <button type="submit" class="btn btn-primary saveButton" style="display: none;">
+                            Create
+                        </button>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12 col-md-12">
                     <div class="row">
-
-
 
                         <div class="row">
                             <div class="col-sm-12" style="padding-right: 0">
@@ -122,6 +125,10 @@
             $('.line-item-checkbox').on('change', function() {
                 // Show the Save button if any checkbox is checked
                 if ($('.line-item-checkbox:checked').length > 0) {
+
+                    let checkedCount = $('.line-item-checkbox:checked').length;
+                    $('.selected-count').text(checkedCount);
+
                     $('.saveButton').show();
                 } else {
                     $('.saveButton').hide();

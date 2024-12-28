@@ -11,14 +11,12 @@
     <div class="page-body">
 
         <div class="container-xl">
-            <div class="row row-deck row-cards">
+            <div class="row  row-cards">
 
                 <div class="col-lg-12 col-md-12">
-                    <div class="row">
 
-
-                        <div class="col-md-12 card card-border-radius pt-4 pb-1">
-                            <div class="">
+                        <div class="card card-border-radius pt-4 pb-1">
+                            <div class="row" style="overflow: hidden">
                                 <div class="col-md-6 d-flex">
                                     <div class="custom-left-arrow-div " >
                                         <a style="text-decoration: none; padding:19px; font-size: 25px; color: black;" href="{{route('orders')}}"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
@@ -36,11 +34,30 @@
 
 
                                 </div>
+                                <div class="col-5 " style="text-align: right">
 
 
+                                    @if($order->session_order_items)
+                                        @if($order->session_order_items->has_session->session_name)
+                                       <div>
+                                        <span class="badge bg-indigo">{{$order->session_order_items->has_session->session_name}}</span>
+                                       </div>
+                                           @endif
+                                        <span class="badge bg-azure mt-3">
+                                            @if($order->session_order_items->has_session->status=='sent_to_iraq')
+                                                Received in Iraq
+                                            @else
+                                                {{ucfirst($order->session_order_items->has_session->status)}}
+                                            @endif
+                                          </span>
+                                    @endif
+
+
+                                </div>
                                 <div class="mx-5  order-details-time">
                                     <div><p>{{ \Carbon\Carbon::parse($order->created_at)->format('F d, Y ')}} at {{ \Carbon\Carbon::parse($order->created_at)->format('g:i A')}} </p></div>
                                 </div>
+
 
                             </div>
                         </div>
@@ -180,7 +197,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+
 
 
 

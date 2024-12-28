@@ -11,4 +11,8 @@ class Order extends Model
     public function line_items(){
         return $this->hasMany(OrderLineItem::class, 'shopify_order_id','shopify_id');
     }
+
+    public function session_order_items(){
+        return $this->hasOne(SessionOrderItem::class, 'order_id','id');
+    }
 }

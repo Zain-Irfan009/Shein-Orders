@@ -112,13 +112,13 @@
                 <div class="col-md-12 card card-border-radius pt-3 pb-3">
                     <div class="row">
                         <div class="col-md-6">
-                            <b>Link</b>
-                            <input type="text" value="{{$session->session_link}}" name="session_link" class="form-control mt-1">
+                            <b>Session Order No</b>
+                            <input type="text" value="{{$session->session_order_no}}" name="session_order_no" class="form-control mt-1">
                         </div>
 
                         <div class="col-md-6">
                             <b>Shein Account</b>
-                            <input type="text" value="{{$session->shein_account}}" name="shein_account" class="form-control mt-1">
+                            <input type="text" required value="{{$session->shein_account}}" name="shein_account" class="form-control mt-1">
                         </div>
 
                     </div>
@@ -133,10 +133,10 @@
                         <div class="card-header">
                             <ul class="nav nav-tabs card-header-tabs nav-fill" data-bs-toggle="tabs">
                                 <li class="nav-item">
-                                    <a href="#tabs-home-5" class="nav-link active" data-bs-toggle="tab">Orders</a>
+                                    <a href="#tabs-home-5" class="nav-link active" data-bs-toggle="tab">Orders ({{count($orders)}})</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#tabs-profile-5" class="nav-link" data-bs-toggle="tab">Packages</a>
+                                    <a href="#tabs-profile-5" class="nav-link" data-bs-toggle="tab">Packages ({{count($packages)}})</a>
                                 </li>
 
                             </ul>
@@ -239,6 +239,10 @@
                                                                         <input type="text" class="form-control mt-2" value="" name="tracking_number">
 
                                                                     <b class="form-check-label mt-2">
+                                                                        ZMC Airway bill
+                                                                    </b>
+                                                                    <input type="text" class="form-control mt-2" value="" name="zmc_airway_bill">
+                                                                    <b class="form-check-label mt-2">
                                                                         Status
                                                                     </b>
                                                                     <select class="form-control mt-2" name="status">
@@ -277,6 +281,7 @@
 
                                                     <th>Package Id</th>
                                                     <th>Tracking Number</th>
+                                                    <th>ZMC Airway bill</th>
                                                     <th>Status</th>
                                                     <th>Action</th>
 
@@ -288,9 +293,12 @@
                                                     <tr>
                                                         <td>#{{++$index}}</td>
                                                         <td>{{$package->tracking_number}}</td>
+                                                        <td>{{$package->zmc_airway_bill}}</td>
                                                         <td><span class="badge bg-warning">{{$package->status}}</span></td>
                                                         <td>
-                                                            <a  data-bs-toggle="modal" data-bs-target="#specific-package{{$package->id}}" class="btn btn-primary btn-sm btn_size mt-2">Update</a>
+                                                            <a data-bs-toggle="modal" data-bs-target="#specific-package{{$package->id}}" class="text-warning" title="Edit">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>
+                                                            </a>
 
                                                             <a  data-id="{{$package->id}}" class="text-danger delete_single_btn" title="Delete" >
                                                                 <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
@@ -304,7 +312,7 @@
                                                             <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <h5 class="modal-title">Update</h5>
+                                                                        <h5 class="modal-title">Update Package</h5>
                                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                     </div>
 
@@ -321,6 +329,10 @@
                                                                                 </b>
                                                                                 <input type="text" class="form-control mt-2" value="{{$package->tracking_number}}" name="tracking_number">
 
+                                                                                <b class="form-check-label mt-2">
+                                                                                    ZMC Airway bill
+                                                                                </b>
+                                                                                <input type="text" class="form-control mt-2" value="{{$package->zmc_airway_bill}}" name="zmc_airway_bill">
                                                                                 <b class="form-check-label mt-2">
                                                                                     Status
                                                                                 </b>

@@ -21,7 +21,7 @@ class SessionController extends Controller
         $waiting_to_purchase=Session::where('status','waiting_to_purchase')->get();
         $waiting_to_purchase_count=Session::where('status','waiting_to_purchase')->count();
 
-        $ordered_on_sheins=Session::where('status','ordered_on_shein')->get();
+        $ordered_on_sheins=Session::withCount('has_packages')->where('status','ordered_on_shein')->get();
         $ordered_on_sheins_count=Session::where('status','ordered_on_shein')->count();
 
         $shipped_from_sheins=Session::where('status','shipped_from_shein')->get();
@@ -132,6 +132,12 @@ class SessionController extends Controller
         $session = Session::findOrFail($id);
         $session->session_link = $request->session_link;
         $session->shein_account = $request->shein_account;
+        $session->session_order_no = $request->session_order_no;
+        if($request->session_order_no){
+            $last4 = substr($request->session_order_no, -4);
+            $session_name='SHE-'.$last4;
+            $session->session_name=$session_name;
+        }
         $session->save();
 
         return redirect()->route('view_session', $session->id)
