@@ -137,6 +137,55 @@ class SessionController extends Controller
             $last4 = substr($request->session_order_no, -4);
             $session_name='SHE-'.$last4;
             $session->session_name=$session_name;
+
+            $session_order_items=SessionOrderItem::where('session_id',$id)->get();
+            foreach ($session_order_items as $session_order_item){
+
+                $order=Order::where('id',$session_order_item->order_id)->first();
+                if($order) {
+                    $query = 'mutation OrderUpdate($input: OrderInput!) {
+                  orderUpdate(input: $input) {
+                    order {
+                      canMarkAsPaid
+                      cancelReason
+                      cancelledAt
+                      clientIp
+                      confirmed
+                      customer {
+                        displayName
+                        email
+                      }
+                      discountCodes
+                    }
+                    userErrors {
+                      field
+                      message
+                    }
+                  }
+                }';
+                    // Ensure that the ID is formatted correctly with the "gid" prefix
+                    $OrderId = 'gid://shopify/Order/' . $order->shopify_id;
+                    $tags_array=[];
+
+                        $tags_array[]=$request->session_order_no;
+                        $tags_array[]=$session_name;
+                    // Define the variables, including the formatted ID and custom attributes
+                    $variables = [
+
+                        'input' => [
+                            'id' => $OrderId,
+                            "tags"=>$tags_array,
+                        ]
+                    ];
+                    // Make the GraphQL API call using the helper method to get the Shopify API instance
+                    $api=getShopify();
+                    $response = $api->graph($query, $variables);
+                    if($response['errors']==false){
+
+
+                    }
+                }
+            }
         }
         $session->save();
 
