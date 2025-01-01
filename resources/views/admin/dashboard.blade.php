@@ -74,6 +74,22 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="subheader">Total Sessions</div>
+                            <div class="h3 m-0">{{$sessions_count}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="subheader">Total Packages</div>
+                            <div class="h3 m-0">{{$packages_count}}</div>
+                        </div>
+                    </div>
+                </div>
 {{--                <div class="col-md-4 col-sm-12">--}}
 {{--                    <div class="card">--}}
 {{--                        <div class="card-body">--}}

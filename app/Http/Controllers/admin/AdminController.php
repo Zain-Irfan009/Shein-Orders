@@ -8,7 +8,9 @@ use App\Jobs\ProductInventoryManageJob;
 use App\Models\Booking;
 use App\Models\Order;
 use App\Models\OrderLineItem;
+use App\Models\Package;
 use App\Models\Product;
+use App\Models\Session;
 use App\Models\Setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -32,18 +34,10 @@ class AdminController extends Controller
 
 
         $orders_count=Order::where('shop_id',Auth::id())->count();
-//        $product_count=Product::where('shop_id',Auth::id())->count();
-//        $vatiant=ProductVariant::where('shop_id',Auth::id())->newQuery();
-//        $vatiant_clone=clone($vatiant);
-//        $vatiant_count=$vatiant_clone->count();
-//        $vatiant_qty=$vatiant_clone->sum('quantity');
-//        $data = [
-//            'product_count' => $product_count,
-//            'variant_count' => $vatiant_count,
-//            'variant_qty' => $vatiant_qty,
-//        ];
-//        dd($data);
-        return view('admin.dashboard',compact('orders_count'));
+        $sessions_count=Session::count();
+        $packages_count=Package::count();
+
+        return view('admin.dashboard',compact('orders_count','sessions_count','packages_count'));
     }
 
 
