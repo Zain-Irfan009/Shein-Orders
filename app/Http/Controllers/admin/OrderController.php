@@ -15,7 +15,7 @@ use function view;
 class OrderController extends Controller
 {
     public function Orders(){
-        $orders=Order::orderBy('id','desc')->paginate(10);
+        $orders=Order::orderBy('order_number','desc')->paginate(10);
         return view('admin.orders.index',compact('orders'));
     }
 
